@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+:root {
+  --color-lagoon: #0e4f4f;
+  --color-lagoon-dark: #0a3a3a;
+  --color-lagoon-light: #e4f0ef;
+  --color-amber: #e8963c;
+  --color-amber-dark: #c9781f;
+  --color-sand: #fbf7f0;
+  --color-charcoal: #1e2a28;
+  --background: var(--color-sand);
+  --foreground: var(--color-charcoal);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-lagoon: var(--color-lagoon);
+  --color-lagoon-dark: var(--color-lagoon-dark);
+  --color-lagoon-light: var(--color-lagoon-light);
+  --color-amber: var(--color-amber);
+  --color-amber-dark: var(--color-amber-dark);
+  --color-sand: var(--color-sand);
+  --color-charcoal: var(--color-charcoal);
+  --font-display: var(--font-fraunces);
+  --font-body: var(--font-manrope);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), sans-serif;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display), serif;
+}
+
+/* Signature route-line divider used between sections */
+.route-divider {
+  position: relative;
+  height: 2px;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--color-amber) 0,
+    var(--color-amber) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+}
+
+.route-divider::before,
+.route-divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  border-radius: 9999px;
+  background: var(--color-amber);
+  transform: translateY(-50%);
+}
+
+.route-divider::before {
+  left: 0;
+}
+
+.route-divider::after {
+  right: 0;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeInUp 0.6s ease-out both;
+}
