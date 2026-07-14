@@ -1,18 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { FiPlus, FiTrash2 } from "react-icons/fi";
+import { FiPlus, FiTrash2, FiImage, FiX, FiLoader } from "react-icons/fi";
 import api from "@/lib/api";
+import { uploadImageToImgBB } from "@/lib/uploadImage";
+import { getErrorMessage } from "@/lib/getErrorMessage";
 import ProtectedRoute from "@/components/ProtectedRoute";
 
 const categories = ["Beach", "Mountain", "Wildlife", "Adventure", "Nature"];
 
 function AddPackageForm() {
   const router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const [imagePreview, setImagePreview] = useState<string>("");
+  const [imageUrl, setImageUrl] = useState<string>("");
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   const [form, setForm] = useState({
     title: "",
@@ -22,7 +30,6 @@ function AddPackageForm() {
     fullDescription: "",
     price: "",
     duration: "",
-    imageUrl: "",
   });
 
   const [inclusions, setInclusions] = useState<string[]>([""]);
@@ -39,12 +46,53 @@ function AddPackageForm() {
     setList(copy);
   };
 
+  const handleImageBoxClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      toast.error("Please select a valid image file.");
+      return;
+    }
+
+    // Local preview immediately
+    const localPreview = URL.createObjectURL(file);
+    setImagePreview(localPreview);
+
+    setUploadingImage(true);
+    try {
+      const uploadedUrl = await uploadImageToImgBB(file);
+      setImageUrl(uploadedUrl);
+      toast.success("Image uploaded!");
+    } catch (err: unknown) {
+      toast.error(getErrorMessage(err, "Image upload failed."));
+      setImagePreview("");
+    } finally {
+      setUploadingImage(false);
+    }
+  };
+
+  const removeImage = () => {
+    setImagePreview("");
+    setImageUrl("");
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
     if (!form.title || !form.destination || !form.shortDescription || !form.fullDescription || !form.price || !form.duration) {
       setError("Please fill in all required fields.");
+      return;
+    }
+
+    if (uploadingImage) {
+      setError("Please wait for the image to finish uploading.");
       return;
     }
 
@@ -58,14 +106,14 @@ function AddPackageForm() {
         fullDescription: form.fullDescription,
         price: Number(form.price),
         duration: Number(form.duration),
-        images: form.imageUrl ? [form.imageUrl] : [],
+        images: imageUrl ? [imageUrl] : [],
         inclusions: inclusions.filter((i) => i.trim()),
         exclusions: exclusions.filter((i) => i.trim()),
       });
       toast.success("Package added successfully!");
       router.push("/packages/manage");
-    } catch (err: any) {
-      setError(err?.response?.data?.message || "Failed to add package. Please try again.");
+    } catch (err: unknown) {
+      setError(getErrorMessage(err, "Failed to add package. Please try again."));
     } finally {
       setLoading(false);
     }
@@ -78,7 +126,7 @@ function AddPackageForm() {
 
       {error && <p className="mt-4 rounded-lg bg-red-50 px-4 py-2 text-sm text-red-600">{error}</p>}
 
-      <form onSubmit={handleSubmit} className="mt-6 space-y-5 rounded-2xl border border-lagoon/10 bg-white p-6">
+      <form onSubmit={handleSubmit} className="mt-6 space-y-5 rounded-2xl border border-lagoon/10 bg-surface p-6">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <label className="mb-1 block text-sm font-medium text-charcoal">Title *</label>
@@ -157,13 +205,47 @@ function AddPackageForm() {
         </div>
 
         <div>
-          <label className="mb-1 block text-sm font-medium text-charcoal">Image URL (optional)</label>
+          <label className="mb-1 block text-sm font-medium text-charcoal">Package Image</label>
           <input
-            value={form.imageUrl}
-            onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
-            placeholder="https://images.unsplash.com/..."
-            className="w-full rounded-lg border border-lagoon/20 px-3 py-2.5 text-sm outline-none"
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            className="hidden"
           />
+
+          {imagePreview ? (
+            <div className="relative h-48 w-full overflow-hidden rounded-xl border border-lagoon/20">
+              <Image src={imagePreview} alt="Preview" fill className="object-cover" unoptimized />
+              {uploadingImage && (
+                <div className="absolute inset-0 flex items-center justify-center gap-2 bg-black/50 text-sm font-medium text-white">
+                  <FiLoader className="animate-spin" /> Uploading...
+                </div>
+              )}
+              {!uploadingImage && (
+                <button
+                  type="button"
+                  onClick={removeImage}
+                  className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 text-white hover:bg-red-500"
+                >
+                  <FiX size={16} />
+                </button>
+              )}
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={handleImageBoxClick}
+              className="flex h-48 w-full flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-lagoon/25 text-charcoal/50 transition hover:border-amber hover:text-amber"
+            >
+              <FiImage size={28} />
+              <span className="text-sm font-medium">Click to choose an image from your device</span>
+              <span className="text-xs text-charcoal/40">PNG, JPG up to a few MB</span>
+            </button>
+          )}
+          <p className="mt-1 text-xs text-charcoal/40">
+            Optional — if skipped, a default travel photo will be used.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -234,7 +316,7 @@ function AddPackageForm() {
 
 export default function AddPackagePage() {
   return (
-    <ProtectedRoute>
+    <ProtectedRoute adminOnly>
       <AddPackageForm />
     </ProtectedRoute>
   );

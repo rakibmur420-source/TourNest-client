@@ -27,6 +27,7 @@ function ManagePackagesContent() {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchMyPackages();
   }, []);
 
@@ -62,7 +63,7 @@ function ManagePackagesContent() {
       {loading ? (
         <p className="text-sm text-charcoal/50">Loading your packages...</p>
       ) : packages.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-lagoon/30 bg-white py-16 text-center">
+        <div className="rounded-2xl border border-dashed border-lagoon/30 bg-surface py-16 text-center">
           <p className="font-display text-lg font-semibold text-charcoal">No packages yet</p>
           <p className="mt-2 text-sm text-charcoal/60">You haven&apos;t published any travel packages.</p>
           <Link
@@ -73,7 +74,7 @@ function ManagePackagesContent() {
           </Link>
         </div>
       ) : (
-        <div className="overflow-x-auto rounded-2xl border border-lagoon/10 bg-white">
+        <div className="overflow-x-auto rounded-2xl border border-lagoon/10 bg-surface">
           <table className="w-full min-w-[640px] text-left text-sm">
             <thead>
               <tr className="border-b border-lagoon/10 text-xs uppercase tracking-wide text-charcoal/50">
@@ -127,7 +128,7 @@ function ManagePackagesContent() {
 
 export default function ManagePackagesPage() {
   return (
-    <ProtectedRoute>
+    <ProtectedRoute adminOnly>
       <ManagePackagesContent />
     </ProtectedRoute>
   );

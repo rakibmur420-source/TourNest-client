@@ -36,7 +36,7 @@ export default function AboutPage() {
 
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3">
           {values.map((v) => (
-            <div key={v.title} className="rounded-2xl border border-lagoon/10 bg-white p-6 text-center shadow-sm">
+            <div key={v.title} className="rounded-2xl border border-lagoon/10 bg-surface p-6 text-center shadow-sm">
               <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lagoon-light text-lagoon">
                 <v.icon size={22} />
               </div>

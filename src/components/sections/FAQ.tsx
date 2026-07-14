@@ -40,7 +40,7 @@ export default function FAQ() {
 
       <div className="space-y-3">
         {faqs.map((faq, i) => (
-          <div key={faq.q} className="overflow-hidden rounded-2xl border border-lagoon/10 bg-white">
+          <div key={faq.q} className="overflow-hidden rounded-2xl border border-lagoon/10 bg-surface">
             <button
               onClick={() => setOpenIndex(openIndex === i ? null : i)}
               className="flex w-full items-center justify-between px-5 py-4 text-left"

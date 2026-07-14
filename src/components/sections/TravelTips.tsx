@@ -31,7 +31,7 @@ export default function TravelTips() {
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {tips.map((tip) => (
-          <article key={tip.title} className="overflow-hidden rounded-2xl border border-lagoon/10 bg-white shadow-sm">
+          <article key={tip.title} className="overflow-hidden rounded-2xl border border-lagoon/10 bg-surface shadow-sm">
             <div className="relative h-44 w-full">
               <Image src={tip.img} alt={tip.title} fill className="object-cover" />
               <span className="absolute left-3 top-3 rounded-full bg-amber px-3 py-1 text-xs font-semibold text-white">

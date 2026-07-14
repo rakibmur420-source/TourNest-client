@@ -40,7 +40,7 @@ export default function Hero() {
 
         <form
           onSubmit={handleSearch}
-          className="animate-fade-up mx-auto mt-8 flex max-w-xl items-center gap-2 rounded-full bg-white p-2 shadow-xl"
+          className="animate-fade-up mx-auto mt-8 flex max-w-xl items-center gap-2 rounded-full bg-surface p-2 shadow-xl"
           style={{ animationDelay: "0.3s" }}
         >
           <FiSearch className="ml-2 shrink-0 text-charcoal/40" size={20} />

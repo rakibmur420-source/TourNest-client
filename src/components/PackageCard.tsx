@@ -5,7 +5,7 @@ import { TravelPackage } from "@/types";
 
 export default function PackageCard({ pkg }: { pkg: TravelPackage }) {
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-lagoon/10 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+    <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-lagoon/10 bg-surface shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
       <div className="relative h-48 w-full shrink-0 overflow-hidden">
         <Image
           src={pkg.images[0]}

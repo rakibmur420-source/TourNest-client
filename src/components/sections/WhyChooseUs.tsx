@@ -35,7 +35,7 @@ export default function WhyChooseUs() {
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {features.map((f) => (
-          <div key={f.title} className="rounded-2xl border border-lagoon/10 bg-white p-6 text-center shadow-sm">
+          <div key={f.title} className="rounded-2xl border border-lagoon/10 bg-surface p-6 text-center shadow-sm">
             <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-lagoon-light text-lagoon">
               <f.icon size={22} />
             </div>

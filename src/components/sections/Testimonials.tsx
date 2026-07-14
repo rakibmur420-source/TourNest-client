@@ -39,7 +39,7 @@ export default function Testimonials() {
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((t) => (
-            <div key={t.name} className="rounded-2xl border border-lagoon/10 bg-white p-6 shadow-sm">
+            <div key={t.name} className="rounded-2xl border border-lagoon/10 bg-surface p-6 shadow-sm">
               <div className="mb-3 flex gap-1 text-amber">
                 {Array.from({ length: t.rating }).map((_, i) => (
                   <FiStar key={i} size={14} className="fill-amber" />

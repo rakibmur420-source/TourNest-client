@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { FiMail, FiLock } from "react-icons/fi";
 import { useAuth } from "@/context/AuthContext";
+import { getErrorMessage } from "@/lib/getErrorMessage";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -27,8 +28,8 @@ export default function LoginPage() {
       await login(email, password);
       toast.success("Welcome back!");
       router.push("/");
-    } catch (err: any) {
-      setError(err?.response?.data?.message || "Login failed. Please try again.");
+    } catch (err: unknown) {
+      setError(getErrorMessage(err, "Login failed. Please try again."));
     } finally {
       setLoading(false);
     }
@@ -46,7 +47,7 @@ export default function LoginPage() {
 
   return (
     <section className="mx-auto flex min-h-[75vh] max-w-md flex-col justify-center px-5 py-12">
-      <div className="rounded-3xl border border-lagoon/10 bg-white p-8 shadow-sm">
+      <div className="rounded-3xl border border-lagoon/10 bg-surface p-8 shadow-sm">
         <h1 className="font-display text-2xl font-semibold text-charcoal">Welcome back</h1>
         <p className="mt-1 text-sm text-charcoal/60">Log in to manage your travel packages.</p>
 

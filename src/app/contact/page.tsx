@@ -31,7 +31,7 @@ export default function ContactPage() {
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-5">
         <div className="lg:col-span-2">
-          <div className="space-y-5 rounded-2xl border border-lagoon/10 bg-white p-6 shadow-sm">
+          <div className="space-y-5 rounded-2xl border border-lagoon/10 bg-surface p-6 shadow-sm">
             <div className="flex items-start gap-3">
               <FiMapPin className="mt-1 text-amber" size={18} />
               <div>
@@ -56,7 +56,7 @@ export default function ContactPage() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-lagoon/10 bg-white p-6 shadow-sm lg:col-span-3">
+        <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-lagoon/10 bg-surface p-6 shadow-sm lg:col-span-3">
           <div>
             <label className="mb-1 block text-sm font-medium text-charcoal">Name</label>
             <input

@@ -36,7 +36,7 @@ export default function Stats() {
             </div>
           </div>
 
-          <div className="rounded-2xl bg-white/5 p-5">
+          <div className="rounded-2xl bg-surface/5 p-5">
             <p className="mb-3 text-sm text-sand/70">Monthly travelers booked via TourNest</p>
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={monthlyTravelers}>

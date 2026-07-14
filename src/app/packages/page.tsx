@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, Suspense } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { FiSearch, FiFilter } from "react-icons/fi";
 import api from "@/lib/api";
 import { TravelPackage, Pagination } from "@/types";
@@ -12,7 +12,6 @@ const categories = ["All", "Beach", "Mountain", "Wildlife", "Adventure", "Nature
 
 function PackagesContent() {
   const searchParams = useSearchParams();
-  const router = useRouter();
 
   const [packages, setPackages] = useState<TravelPackage[]>([]);
   const [pagination, setPagination] = useState<Pagination | null>(null);
@@ -63,7 +62,7 @@ function PackagesContent() {
       </div>
 
       <form onSubmit={handleSearchSubmit} className="mx-auto mb-6 flex max-w-xl gap-2">
-        <div className="flex w-full items-center gap-2 rounded-full border border-lagoon/20 bg-white px-4 py-2.5">
+        <div className="flex w-full items-center gap-2 rounded-full border border-lagoon/20 bg-surface px-4 py-2.5">
           <FiSearch className="text-charcoal/40" size={18} />
           <input
             type="text"
@@ -81,7 +80,7 @@ function PackagesContent() {
         </button>
       </form>
 
-      <div className="mb-10 flex flex-col gap-4 rounded-2xl border border-lagoon/10 bg-white p-5 sm:flex-row sm:flex-wrap sm:items-center">
+      <div className="mb-10 flex flex-col gap-4 rounded-2xl border border-lagoon/10 bg-surface p-5 sm:flex-row sm:flex-wrap sm:items-center">
         <div className="flex items-center gap-2 text-sm font-semibold text-charcoal">
           <FiFilter size={16} className="text-amber" /> Filters:
         </div>
@@ -157,7 +156,7 @@ function PackagesContent() {
               key={i}
               onClick={() => setPage(i + 1)}
               className={`h-9 w-9 rounded-full text-sm font-semibold transition ${
-                page === i + 1 ? "bg-lagoon text-sand" : "bg-white text-charcoal hover:bg-lagoon-light"
+                page === i + 1 ? "bg-lagoon text-sand" : "bg-surface text-charcoal hover:bg-lagoon-light"
               }`}
             >
               {i + 1}

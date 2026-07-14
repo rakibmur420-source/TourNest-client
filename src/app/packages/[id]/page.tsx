@@ -39,6 +39,7 @@ export default function PackageDetailsPage() {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
@@ -110,7 +111,7 @@ export default function PackageDetailsPage() {
             </span>
           </div>
         </div>
-        <div className="rounded-2xl border border-lagoon/10 bg-white px-6 py-4 text-center shadow-sm">
+        <div className="rounded-2xl border border-lagoon/10 bg-surface px-6 py-4 text-center shadow-sm">
           <p className="text-xs text-charcoal/50">Starting from</p>
           <p className="font-display text-2xl font-semibold text-lagoon">৳{pkg.price.toLocaleString()}</p>
           <button className="mt-3 w-full rounded-full bg-amber px-6 py-2.5 text-sm font-semibold text-white hover:bg-amber-dark">
@@ -133,7 +134,7 @@ export default function PackageDetailsPage() {
               <h2 className="font-display text-xl font-semibold text-charcoal">Day-by-Day Itinerary</h2>
               <div className="mt-4 space-y-4">
                 {pkg.itinerary.map((day) => (
-                  <div key={day.day} className="flex gap-4 rounded-xl border border-lagoon/10 bg-white p-4">
+                  <div key={day.day} className="flex gap-4 rounded-xl border border-lagoon/10 bg-surface p-4">
                     <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-lagoon text-sm font-semibold text-sand">
                       {day.day}
                     </div>
@@ -178,7 +179,7 @@ export default function PackageDetailsPage() {
             </h2>
 
             {user ? (
-              <form onSubmit={handleReviewSubmit} className="mt-4 rounded-xl border border-lagoon/10 bg-white p-4">
+              <form onSubmit={handleReviewSubmit} className="mt-4 rounded-xl border border-lagoon/10 bg-surface p-4">
                 <div className="mb-3 flex items-center gap-1">
                   {[1, 2, 3, 4, 5].map((n) => (
                     <button type="button" key={n} onClick={() => setRating(n)}>
@@ -212,7 +213,7 @@ export default function PackageDetailsPage() {
                 <p className="text-sm text-charcoal/50">No reviews yet. Be the first to share your experience!</p>
               ) : (
                 reviews.map((r) => (
-                  <div key={r._id} className="rounded-xl border border-lagoon/10 bg-white p-4">
+                  <div key={r._id} className="rounded-xl border border-lagoon/10 bg-surface p-4">
                     <div className="flex items-center justify-between">
                       <p className="text-sm font-semibold text-charcoal">{r.userName}</p>
                       <div className="flex gap-0.5 text-amber">
@@ -230,7 +231,7 @@ export default function PackageDetailsPage() {
         </div>
 
         {/* Sidebar - Key Info */}
-        <aside className="h-fit rounded-2xl border border-lagoon/10 bg-white p-5">
+        <aside className="h-fit rounded-2xl border border-lagoon/10 bg-surface p-5">
           <h3 className="font-display text-base font-semibold text-charcoal">Key Information</h3>
           <dl className="mt-4 space-y-3 text-sm">
             <div className="flex justify-between">

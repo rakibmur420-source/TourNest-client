@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { FiUser, FiMail, FiLock } from "react-icons/fi";
 import { useAuth } from "@/context/AuthContext";
+import { getErrorMessage } from "@/lib/getErrorMessage";
 
 export default function RegisterPage() {
   const [name, setName] = useState("");
@@ -32,8 +33,8 @@ export default function RegisterPage() {
       await register(name, email, password);
       toast.success("Account created! Welcome to TourNest.");
       router.push("/");
-    } catch (err: any) {
-      setError(err?.response?.data?.message || "Registration failed. Please try again.");
+    } catch (err: unknown) {
+      setError(getErrorMessage(err, "Registration failed. Please try again."));
     } finally {
       setLoading(false);
     }
@@ -41,7 +42,7 @@ export default function RegisterPage() {
 
   return (
     <section className="mx-auto flex min-h-[75vh] max-w-md flex-col justify-center px-5 py-12">
-      <div className="rounded-3xl border border-lagoon/10 bg-white p-8 shadow-sm">
+      <div className="rounded-3xl border border-lagoon/10 bg-surface p-8 shadow-sm">
         <h1 className="font-display text-2xl font-semibold text-charcoal">Create your account</h1>
         <p className="mt-1 text-sm text-charcoal/60">Join TourNest to add and manage travel packages.</p>
 
