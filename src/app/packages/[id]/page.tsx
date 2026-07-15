@@ -192,7 +192,7 @@ export default function PackageDetailsPage() {
                   onChange={(e) => setComment(e.target.value)}
                   placeholder="Share your experience with this trip..."
                   rows={3}
-                  className="w-full rounded-lg border border-lagoon/20 p-3 text-sm outline-none"
+                  className="w-full rounded-lg border border-lagoon/20 bg-surface p-3 text-sm text-charcoal outline-none placeholder:text-charcoal/40"
                 />
                 <button
                   type="submit"

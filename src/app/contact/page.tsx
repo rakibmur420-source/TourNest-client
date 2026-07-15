@@ -62,7 +62,7 @@ export default function ContactPage() {
             <input
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="w-full rounded-lg border border-lagoon/20 px-3 py-2.5 text-sm outline-none"
+              className="w-full rounded-lg border border-lagoon/20 bg-surface px-3 py-2.5 text-sm text-charcoal outline-none placeholder:text-charcoal/40"
               placeholder="Your name"
             />
           </div>
@@ -72,7 +72,7 @@ export default function ContactPage() {
               type="email"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="w-full rounded-lg border border-lagoon/20 px-3 py-2.5 text-sm outline-none"
+              className="w-full rounded-lg border border-lagoon/20 bg-surface px-3 py-2.5 text-sm text-charcoal outline-none placeholder:text-charcoal/40"
               placeholder="you@email.com"
             />
           </div>
@@ -82,7 +82,7 @@ export default function ContactPage() {
               value={form.message}
               onChange={(e) => setForm({ ...form, message: e.target.value })}
               rows={5}
-              className="w-full rounded-lg border border-lagoon/20 px-3 py-2.5 text-sm outline-none"
+              className="w-full rounded-lg border border-lagoon/20 bg-surface px-3 py-2.5 text-sm text-charcoal outline-none placeholder:text-charcoal/40"
               placeholder="How can we help?"
             />
           </div>

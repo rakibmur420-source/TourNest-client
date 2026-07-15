@@ -2,7 +2,9 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { useRouter } from "next/navigation";
+import { signInWithPopup } from "firebase/auth";
 import api from "@/lib/api";
+import { firebaseAuth, googleProvider } from "@/lib/firebase";
 import { User } from "@/types";
 
 interface AuthContextType {
@@ -10,6 +12,7 @@ interface AuthContextType {
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
   register: (name: string, email: string, password: string) => Promise<void>;
+  loginWithGoogle: () => Promise<void>;
   logout: () => void;
   updateUser: (updated: User) => void;
 }
@@ -54,6 +57,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setUser(userData);
   };
 
+  const loginWithGoogle = async () => {
+    const result = await signInWithPopup(firebaseAuth, googleProvider);
+    const idToken = await result.user.getIdToken();
+    const res = await api.post("/auth/google", { idToken });
+    const { token, user: userData } = res.data;
+    localStorage.setItem("tournest_token", token);
+    localStorage.setItem("tournest_user", JSON.stringify(userData));
+    setUser(userData);
+  };
+
   const logout = () => {
     localStorage.removeItem("tournest_token");
     localStorage.removeItem("tournest_user");
@@ -67,7 +80,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, updateUser }}>
+    <AuthContext.Provider
+      value={{ user, loading, login, register, loginWithGoogle, logout, updateUser }}
+    >
       {children}
     </AuthContext.Provider>
   );

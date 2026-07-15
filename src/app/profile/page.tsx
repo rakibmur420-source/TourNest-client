@@ -174,7 +174,7 @@ function ProfileContent() {
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full rounded-lg border border-lagoon/20 px-3 py-2.5 text-sm outline-none"
+              className="w-full rounded-lg border border-lagoon/20 bg-surface px-3 py-2.5 text-sm text-charcoal outline-none placeholder:text-charcoal/40"
             />
           </div>
           <div>
@@ -206,7 +206,7 @@ function ProfileContent() {
               type="password"
               value={currentPassword}
               onChange={(e) => setCurrentPassword(e.target.value)}
-              className="w-full rounded-lg border border-lagoon/20 px-3 py-2.5 text-sm outline-none"
+              className="w-full rounded-lg border border-lagoon/20 bg-surface px-3 py-2.5 text-sm text-charcoal outline-none placeholder:text-charcoal/40"
             />
           </div>
           <div>
@@ -216,7 +216,7 @@ function ProfileContent() {
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               placeholder="At least 6 characters"
-              className="w-full rounded-lg border border-lagoon/20 px-3 py-2.5 text-sm outline-none"
+              className="w-full rounded-lg border border-lagoon/20 bg-surface px-3 py-2.5 text-sm text-charcoal outline-none placeholder:text-charcoal/40"
             />
           </div>
           <div>
@@ -225,7 +225,7 @@ function ProfileContent() {
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full rounded-lg border border-lagoon/20 px-3 py-2.5 text-sm outline-none"
+              className="w-full rounded-lg border border-lagoon/20 bg-surface px-3 py-2.5 text-sm text-charcoal outline-none placeholder:text-charcoal/40"
             />
           </div>
           <button

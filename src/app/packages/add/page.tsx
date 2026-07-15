@@ -134,7 +134,7 @@ function AddPackageForm() {
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
               placeholder="Enchanting Cox's Bazar Escape"
-              className="w-full rounded-lg border border-lagoon/20 px-3 py-2.5 text-sm outline-none"
+              className="w-full rounded-lg border border-lagoon/20 bg-surface px-3 py-2.5 text-sm text-charcoal outline-none placeholder:text-charcoal/40"
             />
           </div>
           <div>
@@ -143,7 +143,7 @@ function AddPackageForm() {
               value={form.destination}
               onChange={(e) => setForm({ ...form, destination: e.target.value })}
               placeholder="Cox's Bazar, Bangladesh"
-              className="w-full rounded-lg border border-lagoon/20 px-3 py-2.5 text-sm outline-none"
+              className="w-full rounded-lg border border-lagoon/20 bg-surface px-3 py-2.5 text-sm text-charcoal outline-none placeholder:text-charcoal/40"
             />
           </div>
         </div>
@@ -154,10 +154,10 @@ function AddPackageForm() {
             <select
               value={form.category}
               onChange={(e) => setForm({ ...form, category: e.target.value })}
-              className="w-full rounded-lg border border-lagoon/20 px-3 py-2.5 text-sm outline-none"
+              className="w-full rounded-lg border border-lagoon/20 bg-surface px-3 py-2.5 text-sm text-charcoal outline-none placeholder:text-charcoal/40"
             >
               {categories.map((c) => (
-                <option key={c} value={c}>{c}</option>
+                <option key={c} value={c} className="bg-surface text-charcoal">{c}</option>
               ))}
             </select>
           </div>
@@ -168,7 +168,7 @@ function AddPackageForm() {
               value={form.price}
               onChange={(e) => setForm({ ...form, price: e.target.value })}
               placeholder="12500"
-              className="w-full rounded-lg border border-lagoon/20 px-3 py-2.5 text-sm outline-none"
+              className="w-full rounded-lg border border-lagoon/20 bg-surface px-3 py-2.5 text-sm text-charcoal outline-none placeholder:text-charcoal/40"
             />
           </div>
           <div>
@@ -178,7 +178,7 @@ function AddPackageForm() {
               value={form.duration}
               onChange={(e) => setForm({ ...form, duration: e.target.value })}
               placeholder="4"
-              className="w-full rounded-lg border border-lagoon/20 px-3 py-2.5 text-sm outline-none"
+              className="w-full rounded-lg border border-lagoon/20 bg-surface px-3 py-2.5 text-sm text-charcoal outline-none placeholder:text-charcoal/40"
             />
           </div>
         </div>
@@ -189,7 +189,7 @@ function AddPackageForm() {
             value={form.shortDescription}
             onChange={(e) => setForm({ ...form, shortDescription: e.target.value })}
             placeholder="One-line summary shown on the package card"
-            className="w-full rounded-lg border border-lagoon/20 px-3 py-2.5 text-sm outline-none"
+            className="w-full rounded-lg border border-lagoon/20 bg-surface px-3 py-2.5 text-sm text-charcoal outline-none placeholder:text-charcoal/40"
           />
         </div>
 
@@ -200,7 +200,7 @@ function AddPackageForm() {
             onChange={(e) => setForm({ ...form, fullDescription: e.target.value })}
             rows={4}
             placeholder="Detailed overview shown on the package details page"
-            className="w-full rounded-lg border border-lagoon/20 px-3 py-2.5 text-sm outline-none"
+            className="w-full rounded-lg border border-lagoon/20 bg-surface px-3 py-2.5 text-sm text-charcoal outline-none placeholder:text-charcoal/40"
           />
         </div>
 
@@ -257,7 +257,7 @@ function AddPackageForm() {
                   value={val}
                   onChange={(e) => updateList(inclusions, setInclusions, i, e.target.value)}
                   placeholder="Hotel accommodation"
-                  className="w-full rounded-lg border border-lagoon/20 px-3 py-2 text-sm outline-none"
+                  className="w-full rounded-lg border border-lagoon/20 bg-surface px-3 py-2 text-sm text-charcoal outline-none placeholder:text-charcoal/40"
                 />
                 {inclusions.length > 1 && (
                   <button type="button" onClick={() => setInclusions(inclusions.filter((_, idx) => idx !== i))}>
@@ -283,7 +283,7 @@ function AddPackageForm() {
                   value={val}
                   onChange={(e) => updateList(exclusions, setExclusions, i, e.target.value)}
                   placeholder="Airfare"
-                  className="w-full rounded-lg border border-lagoon/20 px-3 py-2 text-sm outline-none"
+                  className="w-full rounded-lg border border-lagoon/20 bg-surface px-3 py-2 text-sm text-charcoal outline-none placeholder:text-charcoal/40"
                 />
                 {exclusions.length > 1 && (
                   <button type="button" onClick={() => setExclusions(exclusions.filter((_, idx) => idx !== i))}>

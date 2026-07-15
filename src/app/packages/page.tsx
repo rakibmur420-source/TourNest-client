@@ -91,10 +91,10 @@ function PackagesContent() {
             setCategory(e.target.value);
             setPage(1);
           }}
-          className="rounded-full border border-lagoon/20 px-4 py-2 text-sm outline-none"
+          className="rounded-full border border-lagoon/20 bg-surface px-4 py-2 text-sm text-charcoal outline-none"
         >
           {categories.map((c) => (
-            <option key={c} value={c}>
+            <option key={c} value={c} className="bg-surface text-charcoal">
               {c}
             </option>
           ))}
@@ -108,7 +108,7 @@ function PackagesContent() {
             setPage(1);
           }}
           placeholder="Min price ৳"
-          className="w-32 rounded-full border border-lagoon/20 px-4 py-2 text-sm outline-none"
+          className="w-32 rounded-full border border-lagoon/20 bg-surface px-4 py-2 text-sm text-charcoal outline-none placeholder:text-charcoal/40"
         />
         <input
           type="number"
@@ -118,7 +118,7 @@ function PackagesContent() {
             setPage(1);
           }}
           placeholder="Max price ৳"
-          className="w-32 rounded-full border border-lagoon/20 px-4 py-2 text-sm outline-none"
+          className="w-32 rounded-full border border-lagoon/20 bg-surface px-4 py-2 text-sm text-charcoal outline-none placeholder:text-charcoal/40"
         />
 
         <select
@@ -127,12 +127,12 @@ function PackagesContent() {
             setSort(e.target.value);
             setPage(1);
           }}
-          className="ml-auto rounded-full border border-lagoon/20 px-4 py-2 text-sm outline-none"
+          className="ml-auto rounded-full border border-lagoon/20 bg-surface px-4 py-2 text-sm text-charcoal outline-none"
         >
-          <option value="newest">Newest First</option>
-          <option value="price_asc">Price: Low to High</option>
-          <option value="price_desc">Price: High to Low</option>
-          <option value="rating">Highest Rated</option>
+          <option value="newest" className="bg-surface text-charcoal">Newest First</option>
+          <option value="price_asc" className="bg-surface text-charcoal">Price: Low to High</option>
+          <option value="price_desc" className="bg-surface text-charcoal">Price: High to Low</option>
+          <option value="rating" className="bg-surface text-charcoal">Highest Rated</option>
         </select>
       </div>
 

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { FiUser, FiMail, FiLock } from "react-icons/fi";
+import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "@/context/AuthContext";
 import { getErrorMessage } from "@/lib/getErrorMessage";
 
@@ -14,7 +15,8 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { register } = useAuth();
+  const [googleLoading, setGoogleLoading] = useState(false);
+  const { register, loginWithGoogle } = useAuth();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -37,6 +39,20 @@ export default function RegisterPage() {
       setError(getErrorMessage(err, "Registration failed. Please try again."));
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleGoogleSignup = async () => {
+    setError("");
+    setGoogleLoading(true);
+    try {
+      await loginWithGoogle();
+      toast.success("Welcome to TourNest!");
+      router.push("/");
+    } catch (err: unknown) {
+      setError(getErrorMessage(err, "Google sign-in failed. Please try again."));
+    } finally {
+      setGoogleLoading(false);
     }
   };
 
@@ -101,6 +117,21 @@ export default function RegisterPage() {
             {loading ? "Creating account..." : "Sign Up"}
           </button>
         </form>
+
+        <div className="my-5 flex items-center gap-3">
+          <div className="h-px flex-1 bg-lagoon/10" />
+          <span className="text-xs text-charcoal/40">or</span>
+          <div className="h-px flex-1 bg-lagoon/10" />
+        </div>
+
+        <button
+          onClick={handleGoogleSignup}
+          disabled={googleLoading}
+          className="flex w-full items-center justify-center gap-2 rounded-full border border-lagoon/20 py-2.5 text-sm font-semibold text-charcoal transition hover:bg-lagoon-light disabled:opacity-60"
+        >
+          <FcGoogle size={18} />
+          {googleLoading ? "Signing in..." : "Continue with Google"}
+        </button>
 
         <p className="mt-6 text-center text-sm text-charcoal/60">
           Already have an account?{" "}
